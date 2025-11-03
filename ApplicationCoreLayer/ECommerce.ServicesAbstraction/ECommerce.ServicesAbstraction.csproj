@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>E_Commerce.Presentation</RootNamespace>
+    <RootNamespace>E_Commerce.Services_Abstraction</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ApplicationCoreLayer\E Commerce.Services Abstraction\ECommerce.ServicesAbstraction.csproj" />
+    <ProjectReference Include="..\..\ECommerce.Shared\ECommerce.Shared.csproj" />
   </ItemGroup>
 
 </Project>
