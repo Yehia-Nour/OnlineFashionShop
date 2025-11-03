@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ApplicationCoreLayer\E Commerce.Services Abstraction\E Commerce.Services Abstraction.csproj" />
+    <ProjectReference Include="..\..\ApplicationCoreLayer\E Commerce.Services Abstraction\ECommerce.ServicesAbstraction.csproj" />
   </ItemGroup>
 
 </Project>
