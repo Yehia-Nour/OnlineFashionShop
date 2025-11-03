@@ -16,12 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\E Commerce.Persistence\E Commerce.Persistence.csproj" />
-    <ProjectReference Include="..\E Commerce.Presentation\E Commerce.Presentation.csproj" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\..\InfrastructureLayer\E Commerce.Persistence\E Commerce.Persistence.csproj" />
+    <ProjectReference Include="..\E Commerce.Presentation\E Commerce.Presentation.csproj" />
   </ItemGroup>
 
 </Project>
