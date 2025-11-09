@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace E_Commerce.Persistence.Data.Migrations
+namespace ECommerce.Persistence.Data.Migrations
 {
     /// <inheritdoc />
     public partial class ProductModuleTables : Migration

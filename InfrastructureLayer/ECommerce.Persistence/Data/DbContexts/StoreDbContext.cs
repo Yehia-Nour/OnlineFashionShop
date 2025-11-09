@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Persistence.Data.DbContexts
+namespace ECommerce.Persistence.Data.DbContexts
 {
     public class StoreDbContext : DbContext
     {
