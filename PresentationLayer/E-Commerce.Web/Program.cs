@@ -1,8 +1,11 @@
 
-using E_Commerce.Persistence.Data.DbContexts;
+using ECommerce.Domain.Contracts;
+using ECommerce.Persistence.Data.DataSeed;
+using ECommerce.Persistence.Data.DbContexts;
+using ECommerce.Web.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace E_Commerce.Web
+namespace ECommerce.Web
 {
     public class Program
     {
@@ -22,7 +25,12 @@ namespace E_Commerce.Web
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            builder.Services.AddScoped<IDataInitializer, DataInitializer>();
+
             var app = builder.Build();
+
+           app.MigrateDatabase()
+                .SeedDatabase();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
