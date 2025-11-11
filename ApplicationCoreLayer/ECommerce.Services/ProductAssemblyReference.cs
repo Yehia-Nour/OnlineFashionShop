@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerce.Domain.Entities
+namespace ECommerce.Services
 {
-    public abstract class BaseEntity<TKey>
+    public class ProductAssemblyReference
     {
-        public TKey Id { get; set; } = default!;
     }
 }

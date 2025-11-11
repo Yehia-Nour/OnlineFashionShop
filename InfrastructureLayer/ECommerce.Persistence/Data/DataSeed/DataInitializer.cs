@@ -1,5 +1,5 @@
-﻿using E_Commerce.Domain.Entities;
-using E_Commerce.Domain.Entities.ProductModule;
+﻿using ECommerce.Domain.Entities;
+using ECommerce.Domain.Entities.ProductModule;
 using ECommerce.Domain.Contracts;
 using ECommerce.Persistence.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
@@ -20,26 +20,26 @@ namespace ECommerce.Persistence.Data.DataSeed
         {
             _dbContext = dbContext;
         }
-        public void Initialize()
+        public async Task InitializeAsync()
         {
             try
             {
-                var hasProducts = _dbContext.Products.Any();
-                var hasBrands = _dbContext.ProductBrands.Any();
-                var hasTypes = _dbContext.ProductTypes.Any();
+                var hasProducts = await _dbContext.Products.AnyAsync();
+                var hasBrands = await _dbContext.ProductBrands.AnyAsync();
+                var hasTypes = await _dbContext.ProductTypes.AnyAsync();
                 if (hasProducts && hasBrands && hasTypes)
                     return;
 
                 if (!hasBrands)
-                    SeedDataFromJson<ProductBrand, int>("brands.json", _dbContext.ProductBrands);
+                    await SeedDataFromJsonAsync<ProductBrand, int>("brands.json", _dbContext.ProductBrands);
 
                 if (!hasTypes)
-                    SeedDataFromJson<ProductType, int>("types.json", _dbContext.ProductTypes);
-                _dbContext.SaveChanges();
+                    await SeedDataFromJsonAsync<ProductType, int>("types.json", _dbContext.ProductTypes);
+                await _dbContext.SaveChangesAsync();
 
                 if (!hasProducts)
-                    SeedDataFromJson<Product, int>("roducts.json", _dbContext.Products);
-                _dbContext.SaveChanges();
+                    await SeedDataFromJsonAsync<Product, int>("products.json", _dbContext.Products);
+                await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -47,10 +47,9 @@ namespace ECommerce.Persistence.Data.DataSeed
             }
         }
 
-        private void SeedDataFromJson<T, TKey>(string fileName ,DbSet<T> dbset) where T : BaseEntity<TKey>
+        private async Task SeedDataFromJsonAsync<T, TKey>(string fileName, DbSet<T> dbset) where T : BaseEntity<TKey>
         {
-            // C:\Users\DELL\Desktop\MyProjectsInVS\E-CommerceSolution\InfrastructureLayer\ECommerce.Persistence\Data\DataSeed\JSONFiles\
-            var filePath = @"..\ECommerce.Persistence\Data\DataSeed\JSONFiles\" + fileName;
+            var filePath = @"..\..\InfrastructureLayer\ECommerce.Persistence\Data\DataSeed\JSONFiles\" + fileName;
             if (!File.Exists(filePath))
                 throw new FileNotFoundException($"File : {fileName} is not exists");
 
@@ -58,15 +57,15 @@ namespace ECommerce.Persistence.Data.DataSeed
             {
                 using var dataStream = File.OpenRead(filePath);
 
-                var data = JsonSerializer.Deserialize<List<T>>(dataStream, new JsonSerializerOptions()
+                var data = await JsonSerializer.DeserializeAsync<List<T>>(dataStream, new JsonSerializerOptions()
                 {
                     PropertyNameCaseInsensitive = true
                 });
 
                 if (data is not null)
-                    dbset.AddRange(data);
+                    await dbset.AddRangeAsync(data);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error while reading JSON file : {ex}");
             }
