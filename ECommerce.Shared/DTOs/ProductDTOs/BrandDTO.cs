@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerce.Domain.Entities.ProductModule
+namespace ECommerce.Shared.DTOs.ProductDTOs
 {
-    public class ProductType : BaseEntity<int>
+    public class BrandDTO
     {
+        public int Id { get; set; }
         public string Name { get; set; } = default!;
     }
 }

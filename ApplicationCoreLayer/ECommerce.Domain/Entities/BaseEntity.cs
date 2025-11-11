@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Domain.Entities
+namespace ECommerce.Domain.Entities
 {
     public abstract class BaseEntity<TKey>
     {
