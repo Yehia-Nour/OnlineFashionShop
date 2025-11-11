@@ -34,7 +34,9 @@ namespace ECommerce.Web
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IProductService, ProductService>();
 
-            builder.Services.AddAutoMapper(x => x.AddProfile<ProductProfile>());
+            builder.Services.AddAutoMapper(typeof(ProductAssemblyReference).Assembly);
+
+            //builder.Services.AddTransient<ProductPictureUrlResolver>();
 
             var app = builder.Build();
 
@@ -49,6 +51,8 @@ namespace ECommerce.Web
             }
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
