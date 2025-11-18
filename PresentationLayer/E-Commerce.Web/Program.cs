@@ -33,8 +33,13 @@ namespace ECommerce.Web
 
             builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
             {
-                return ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("RedisConnection")!);
+                var options = ConfigurationOptions.Parse(
+                    builder.Configuration.GetConnectionString("RedisConnection")!
+                );
+                options.AbortOnConnectFail = false;
+                return ConnectionMultiplexer.Connect(options);
             });
+
 
             builder.Services.AddScoped<IDataInitializer, DataInitializer>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
