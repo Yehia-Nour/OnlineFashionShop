@@ -6,10 +6,16 @@ using ECommerce.Persistence.Repositories;
 using ECommerce.Services;
 using ECommerce.Services.MappingProfiles;
 using ECommerce.ServicesAbstraction;
+using ECommerce.Web.CustomMiddlewares;
 using ECommerce.Web.Extensions;
+using ECommerce.Web.Factories;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 using System.Threading.Tasks;
+using ExceptionHandlerMiddleware = ECommerce.Web.CustomMiddlewares.ExceptionHandlerMiddleware;
 
 namespace ECommerce.Web
 {
@@ -51,12 +57,19 @@ namespace ECommerce.Web
 
             builder.Services.AddAutoMapper(typeof(ProductAssemblyReference).Assembly);
 
+            builder.Services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = ApiResponseFactory.GenerateApiValidationResponse;
+            });
+
             //builder.Services.AddTransient<ProductPictureUrlResolver>();
 
             var app = builder.Build();
 
             await app.MigrateDatabaseAsync();
             await app.SeedDatabaseAsync();
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
