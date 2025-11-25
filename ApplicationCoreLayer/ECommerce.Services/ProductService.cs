@@ -5,12 +5,15 @@ using ECommerce.Services.Exceptions;
 using ECommerce.Services.Specifications;
 using ECommerce.ServicesAbstraction;
 using ECommerce.Shared;
+using ECommerce.Shared.CommonResult;
 using ECommerce.Shared.DTOs.ProductDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using Error = ECommerce.Shared.CommonResult.Error;
 
 namespace ECommerce.Services
 {
@@ -37,13 +40,13 @@ namespace ECommerce.Services
             return new PaginatedResult<ProductDTO>(queryParamss.PageIndex, countOfReturnData, countOfAllProducts, dataToReturn);
         }
 
-        public async Task<ProductDTO> GetProductByIdAsync(int id)
+        public async Task<Result<ProductDTO>> GetProductByIdAsync(int id)
         {
             var spec = new ProductWithTypeAndBrandSpecification(id);
 
             var product = await _unitOfWork.GetRepository<Product, int>().GetByIdAsync(spec);
             if (product is null)
-                throw new ProductNotFoundException(id);
+                return Error.NotFound("Product.NotFound", $"Product With Id: {id} Not Found");
 
             return _mapper.Map<ProductDTO>(product);
         }
