@@ -31,9 +31,9 @@ namespace ECommerce.Shared.CommonResult
 
         private Result(TValue value) { _value = value; }
 
-        private Result(Error error) : base(error) { _value = default; }
+        private Result(Error error) : base(error) { _value = default!; }
 
-        private Result(List<Error> errors) : base(errors) { _value = default; }
+        private Result(List<Error> errors) : base(errors) { _value = default!; }
 
         public static Result<TValue> Ok(TValue value) => new(value);
         public static new Result<TValue> Fail(Error error) => new(error);
