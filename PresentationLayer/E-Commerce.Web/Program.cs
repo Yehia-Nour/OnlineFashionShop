@@ -68,6 +68,7 @@ namespace ECommerce.Web
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IBasketService, BasketService>();
             builder.Services.AddScoped<ICacheService, CacheService>();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             builder.Services.AddAutoMapper(typeof(ProductAssemblyReference).Assembly);
 
