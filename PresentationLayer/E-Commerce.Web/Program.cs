@@ -12,12 +12,15 @@ using ECommerce.ServicesAbstraction;
 using ECommerce.Web.CustomMiddlewares;
 using ECommerce.Web.Extensions;
 using ECommerce.Web.Factories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
+using System.Text;
 using System.Threading.Tasks;
 using ExceptionHandlerMiddleware = ECommerce.Web.CustomMiddlewares.ExceptionHandlerMiddleware;
 
@@ -77,6 +80,24 @@ namespace ECommerce.Web
                 options.InvalidModelStateResponseFactory = ApiResponseFactory.GenerateApiValidationResponse;
             });
 
+            builder.Services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options => {
+                options.SaveToken = true;
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = builder.Configuration["JWTOption:Issuer"],
+                    ValidAudience = builder.Configuration["JWTOptions:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTOptions:SecretKey"]!))
+                };
+            });
+
             //builder.Services.AddTransient<ProductPictureUrlResolver>();
 
             var app = builder.Build();
@@ -98,6 +119,8 @@ namespace ECommerce.Web
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
