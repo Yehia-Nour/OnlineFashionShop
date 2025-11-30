@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Domain.Entities.OrderModule
 {
-    public class Order
+    public class Order : BaseEntity<int>
     {
         public string UserEmail { get; set; } = default!;
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
