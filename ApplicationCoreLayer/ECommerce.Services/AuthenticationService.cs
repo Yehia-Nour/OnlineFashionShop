@@ -91,7 +91,7 @@ namespace ECommerce.Services
                 claims.Add(new(ClaimTypes.Role, role));
 
             var secretKey = _configuration["JWTOptions:SecretKey"];
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
 
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
