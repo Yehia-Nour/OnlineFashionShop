@@ -1,18 +1,12 @@
 ﻿using AutoMapper;
 using ECommerce.Domain.Contracts;
 using ECommerce.Domain.Entities.ProductModule;
-using ECommerce.Services.Exceptions;
 using ECommerce.Services.Specifications;
+using ECommerce.Services.Specifications.ProductSpecifications;
 using ECommerce.ServicesAbstraction;
 using ECommerce.Shared;
 using ECommerce.Shared.CommonResult;
 using ECommerce.Shared.DTOs.ProductDTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using Error = ECommerce.Shared.CommonResult.Error;
 
 namespace ECommerce.Services
