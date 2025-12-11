@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerce.Services.Specifications
+namespace ECommerce.Services.Specifications.ProductSpecifications
 {
     internal static class ProductSpecificationsHelper
     {

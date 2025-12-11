@@ -3,6 +3,7 @@ using ECommerce.Domain.Contracts;
 using ECommerce.Domain.Entities.BasketModule;
 using ECommerce.Domain.Entities.OrderModule;
 using ECommerce.Domain.Entities.ProductModule;
+using ECommerce.Services.Specifications.OrderSpecifications;
 using ECommerce.ServicesAbstraction;
 using ECommerce.Shared.CommonResult;
 using ECommerce.Shared.DTOs;
@@ -69,6 +70,31 @@ namespace ECommerce.Services
             return _mapper.Map<OrderToReturnDTO>(order);
         }
 
+        public async Task<Result<IEnumerable<DeliveryMethodDTO>>> GetDeliveryMethodsAsync()
+        {
+            var deliveryMethods = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetAllAsync();
+
+            return _mapper.Map<IEnumerable<DeliveryMethodDTO>>(deliveryMethods).ToList();
+        }
+
+        public async Task<Result<IEnumerable<OrderToReturnDTO>>> GetAllOrdersAsync(string email)
+        {
+            var orderSpec = new OrderSpecification(email);
+            var orders = await _unitOfWork.GetRepository<Order, Guid>().GetAllAsync(orderSpec);
+
+            return _mapper.Map<IEnumerable<OrderToReturnDTO>>(orders).ToList();
+        }
+
+        public async Task<Result<OrderToReturnDTO>> GetOrderByIdAsync(Guid id, string email)
+        {
+            var orderSpec = new OrderSpecification(id, email);
+            var order = await _unitOfWork.GetRepository<Order, Guid>().GetByIdAsync(orderSpec);
+            if (order is null)
+                return Error.NotFound("Order.NotFound", $"Order With Id: {id} Not Found");
+
+            return _mapper.Map<OrderToReturnDTO>(order);
+        }
+        
         private static OrderItem CreateOrderItem(BasketItem item, Product product)
         {
             return new OrderItem
