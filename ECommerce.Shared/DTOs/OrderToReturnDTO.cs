@@ -1,19 +1,19 @@
 ﻿using ECommerce.Shared.DTOs.OrderDTOs;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerce.Shared.DTOs
 {
-    public record OrderToReturnDTO(Guid Id,
-        string UserEmail,
-        ICollection<OrderItemDTO> Items,
-        AddressDTO Address,
-        string DeliveryMethod,
-        string OrderStatus,
-        DateTimeOffset OrderDate,
-        decimal SubTotal,
-        decimal Total);
+    public class OrderToReturnDTO
+    {
+        public Guid Id { get; set; }
+        public string UserEmail { get; set; }
+        public ICollection<OrderItemDTO> Items { get; set; }
+        public AddressDTO Address { get; set; }
+        public string DeliveryMethod { get; set; }
+        public string OrderStatus { get; set; }
+        public DateTimeOffset OrderDate { get; set; }
+        public decimal SubTotal { get; set; }
+        public decimal Total { get; set; }
+    }
 }
