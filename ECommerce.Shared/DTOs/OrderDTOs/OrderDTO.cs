@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ECommerce.Shared.DTOs.OrderDTOs;
 
 namespace ECommerce.Shared.DTOs.OrderDTOs
 {
-    public record OrderDTO(string BasketId, int DeliveryMethodId, AddressDTO Address);
+    public class OrderDTO
+    {
+        public string BasketId { get; set; }
+        public int DeliveryMethodId { get; set; }
+        public AddressDTO Address { get; set; }
+    }
 }

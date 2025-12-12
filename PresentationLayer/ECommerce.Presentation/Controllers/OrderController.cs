@@ -49,7 +49,7 @@ namespace ECommerce.Presentation.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("deliveryMethods")]
         public async Task<ActionResult<IEnumerable<DeliveryMethodDTO>>> GetDeliveryMethods()
         {
             var result = await _orderService.GetDeliveryMethodsAsync();

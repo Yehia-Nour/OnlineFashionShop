@@ -6,5 +6,13 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Shared.DTOs.OrderDTOs
 {
-    public record DeliveryMethodDTO(int Id, string ShortName, string Desciption, string DeliveryTime, decimal Price);
+    public class DeliveryMethodDTO
+    {
+        public int Id { get; set; }
+        public string ShortName { get; set; } = default!;
+        public string Description { get; set; } = default!;
+        public string DeliveryTime { get; set; } = default!;
+        public decimal Price { get; set; }
+    }
+
 }
