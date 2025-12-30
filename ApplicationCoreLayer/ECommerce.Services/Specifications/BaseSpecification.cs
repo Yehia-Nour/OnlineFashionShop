@@ -1,11 +1,6 @@
 ﻿using ECommerce.Domain.Contracts;
 using ECommerce.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerce.Services.Specifications
 {
@@ -25,14 +20,8 @@ namespace ECommerce.Services.Specifications
 
         public Expression<Func<TEntity, object>> OrderBy { get; private set; }
         public Expression<Func<TEntity, object>> OrderByDescending { get; private set; }
-        protected void AddOrderBy(Expression<Func<TEntity, object>> orderByExp)
-        {
-            OrderBy = orderByExp;
-        }
-        protected void AddOrderByDescending(Expression<Func<TEntity, object>> orderByDescendingExp)
-        {
-            OrderByDescending = orderByDescendingExp;
-        }
+        protected void AddOrderBy(Expression<Func<TEntity, object>> orderByExp) => OrderBy = orderByExp;
+        protected void AddOrderByDescending(Expression<Func<TEntity, object>> orderByDescendingExp) => OrderByDescending = orderByDescendingExp;
 
         public int Take { get; private set; }
         public int Skip { get; private set; }

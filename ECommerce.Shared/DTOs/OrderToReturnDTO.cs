@@ -1,6 +1,4 @@
 ﻿using ECommerce.Shared.DTOs.OrderDTOs;
-using System;
-using System.Collections.Generic;
 
 namespace ECommerce.Shared.DTOs
 {

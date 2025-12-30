@@ -1,6 +1,4 @@
-﻿using ECommerce.Shared.DTOs.OrderDTOs;
-
-namespace ECommerce.Shared.DTOs.OrderDTOs
+﻿namespace ECommerce.Shared.DTOs.OrderDTOs
 {
     public class OrderDTO
     {

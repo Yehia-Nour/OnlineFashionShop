@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ECommerce.Domain.Contracts;
 using ECommerce.Domain.Entities.ProductModule;
-using ECommerce.Services.Specifications;
 using ECommerce.Services.Specifications.ProductSpecifications;
 using ECommerce.ServicesAbstraction;
 using ECommerce.Shared;
@@ -21,7 +20,7 @@ namespace ECommerce.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<PaginatedResult<ProductDTO>> GetAllProductsAsync(ProductQueryParamss queryParamss)
+        public async Task<Result<PaginatedResult<ProductDTO>>> GetAllProductsAsync(ProductQueryParamss queryParamss)
         {
             var repo = _unitOfWork.GetRepository<Product, int>();
             var spec = new ProductWithTypeAndBrandSpecification(queryParamss);
@@ -45,18 +44,18 @@ namespace ECommerce.Services
             return _mapper.Map<ProductDTO>(product);
         }
 
-        public async Task<IEnumerable<TypeDTO>> GetAllTypesAsync()
+        public async Task<Result<IEnumerable<TypeDTO>>> GetAllTypesAsync()
         {
             var types = await _unitOfWork.GetRepository<ProductType, int>().GetAllAsync();
 
-            return _mapper.Map<IEnumerable<TypeDTO>>(types);
+            return _mapper.Map<List<TypeDTO>>(types);
         }
 
-        public async Task<IEnumerable<BrandDTO>> GetAllBrandsAsync()
+        public async Task<Result<IEnumerable<BrandDTO>>> GetAllBrandsAsync()
         {
             var brands = await _unitOfWork.GetRepository<ProductBrand, int>().GetAllAsync();
 
-            return _mapper.Map<IEnumerable<BrandDTO>>(brands);
+            return _mapper.Map<List<BrandDTO>>(brands);
         }
     }
 }

@@ -8,11 +8,6 @@ using ECommerce.ServicesAbstraction;
 using ECommerce.Shared.CommonResult;
 using ECommerce.Shared.DTOs;
 using ECommerce.Shared.DTOs.OrderDTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerce.Services
 {
@@ -94,7 +89,7 @@ namespace ECommerce.Services
 
             return _mapper.Map<OrderToReturnDTO>(order);
         }
-        
+
         private static OrderItem CreateOrderItem(BasketItem item, Product product)
         {
             return new OrderItem
