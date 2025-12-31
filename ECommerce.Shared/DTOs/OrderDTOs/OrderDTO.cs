@@ -1,11 +1,11 @@
-﻿using ECommerce.Shared.DTOs.OrderDTOs;
-
-namespace ECommerce.Shared.DTOs.OrderDTOs
+﻿namespace ECommerce.Shared.DTOs.OrderDTOs
 {
-    public class OrderDTO
+    public record OrderDTO
     {
-        public string BasketId { get; set; }
-        public int DeliveryMethodId { get; set; }
-        public AddressDTO Address { get; set; }
+        public string BasketId { get; init; }
+
+        public int DeliveryMethodId { get; init; }
+
+        public AddressDTO ShipToAddress { get; init; }
     }
 }

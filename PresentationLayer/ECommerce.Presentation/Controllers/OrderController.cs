@@ -1,14 +1,7 @@
 ﻿using ECommerce.ServicesAbstraction;
-using ECommerce.Shared.DTOs;
 using ECommerce.Shared.DTOs.OrderDTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerce.Presentation.Controllers
 {

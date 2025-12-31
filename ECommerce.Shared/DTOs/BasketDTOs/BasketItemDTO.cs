@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ECommerce.Shared.DTOs
+namespace ECommerce.Shared.DTOs.BasketDTOs
 {
     public class BasketItemDTO
     {

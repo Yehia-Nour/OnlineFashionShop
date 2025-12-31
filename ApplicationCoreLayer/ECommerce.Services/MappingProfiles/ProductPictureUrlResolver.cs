@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
-using AutoMapper.Execution;
 using ECommerce.Domain.Entities.ProductModule;
 using ECommerce.Shared.DTOs.ProductDTOs;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerce.Services.MappingProfiles
 {

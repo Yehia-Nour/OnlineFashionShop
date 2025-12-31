@@ -1,12 +1,10 @@
 ﻿using ECommerce.ServicesAbstraction;
 using ECommerce.Shared.DTOs.IdentityDTOs;
+using ECommerce.Shared.DTOs.OrderDTOs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerce.Presentation.Controllers
 {
@@ -48,5 +46,25 @@ namespace ECommerce.Presentation.Controllers
             return HandleResult(result);
         }
 
+        [ProducesResponseType<AddressDTO>(StatusCodes.Status200OK)]
+        [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+        [ProducesResponseType<ProblemDetails>(StatusCodes.Status401Unauthorized)]
+        [Authorize]
+        [HttpGet("Address")]
+        public async Task<ActionResult<AddressDTO>> GetAddress()
+        {
+            var email = GetEmailFromToken();
+            var result = await _authenticationService.GetAddressAsync(email);
+            return HandleResult(result);
+        }
+
+        [Authorize]
+        [HttpPut("Address")]
+        public async Task<ActionResult<AddressDTO>> UpdateAddress(AddressDTO addressDTO)
+        {
+            var email = GetEmailFromToken();
+            var result = await _authenticationService.UpdateUserAddressAsync(email, addressDTO);
+            return HandleResult(result);
+        }
     }
 }

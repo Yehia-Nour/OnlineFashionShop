@@ -1,13 +1,6 @@
 ﻿using AutoMapper;
-using ECommerce.Domain.Entities.IdentityModule;
 using ECommerce.Domain.Entities.OrderModule;
-using ECommerce.Shared.DTOs;
 using ECommerce.Shared.DTOs.OrderDTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerce.Services.MappingProfiles
 {

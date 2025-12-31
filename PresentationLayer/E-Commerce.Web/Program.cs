@@ -9,20 +9,16 @@ using ECommerce.Persistence.Repositories;
 using ECommerce.Services;
 using ECommerce.Services.MappingProfiles;
 using ECommerce.ServicesAbstraction;
-using ECommerce.Web.CustomMiddlewares;
 using ECommerce.Web.Extensions;
 using ECommerce.Web.Factories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using System.Text;
-using System.Threading.Tasks;
 using ExceptionHandlerMiddleware = ECommerce.Web.CustomMiddlewares.ExceptionHandlerMiddleware;
 
 namespace ECommerce.Web
@@ -101,6 +97,7 @@ namespace ECommerce.Web
             builder.Services.AddScoped<ICacheService, CacheService>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IPaymentService, PaymentService>();
 
             builder.Services.AddAutoMapper(typeof(ProductAssemblyReference).Assembly);
 
@@ -113,7 +110,8 @@ namespace ECommerce.Web
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options => {
+            }).AddJwtBearer(options =>
+            {
                 options.SaveToken = true;
 
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -127,7 +125,7 @@ namespace ECommerce.Web
                 };
             });
 
-            //builder.Services.AddTransient<ProductPictureUrlResolver>();
+            builder.Services.AddTransient<ProductPictureUrlResolver>();
 
             var app = builder.Build();
 
@@ -136,7 +134,6 @@ namespace ECommerce.Web
             await app.SeedDatabaseAsync();
             await app.SeedIdentityDatabaseAsync();
 
-            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -144,6 +141,8 @@ namespace ECommerce.Web
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseHttpsRedirection();
 

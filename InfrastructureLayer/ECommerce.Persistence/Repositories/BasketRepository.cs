@@ -1,12 +1,7 @@
 ﻿using ECommerce.Domain.Contracts;
 using ECommerce.Domain.Entities.BasketModule;
 using StackExchange.Redis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ECommerce.Persistence.Repositories
 {
@@ -22,7 +17,7 @@ namespace ECommerce.Persistence.Repositories
             var basket = await _database.StringGetAsync(Id);
             if (basket.IsNullOrEmpty)
                 return null;
-            else 
+            else
                 return JsonSerializer.Deserialize<CustomerBasket>(basket!);
         }
 

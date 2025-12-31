@@ -1,10 +1,6 @@
 ﻿using ECommerce.Shared.CommonResult;
 using ECommerce.Shared.DTOs.IdentityDTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ECommerce.Shared.DTOs.OrderDTOs;
 
 namespace ECommerce.ServicesAbstraction
 {
@@ -14,5 +10,7 @@ namespace ECommerce.ServicesAbstraction
         Task<Result<UserDTO>> RegisterAsync(RegisterDTO registerDTO);
         Task<bool> CheckEmailAsync(string email);
         Task<Result<UserDTO>> GetUserByEmailAsync(string email);
+        Task<Result<AddressDTO>> GetAddressAsync(string email);
+        Task<Result<AddressDTO>> UpdateUserAddressAsync(string email, AddressDTO addressDTO);
     }
 }
