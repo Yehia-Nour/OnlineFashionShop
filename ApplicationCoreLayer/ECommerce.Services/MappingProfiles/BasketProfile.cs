@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ECommerce.Domain.Entities.BasketModule;
-using ECommerce.Shared.DTOs;
 using ECommerce.Shared.DTOs.BasketDTOs;
 
 namespace ECommerce.Services.MappingProfiles

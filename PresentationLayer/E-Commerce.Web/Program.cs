@@ -97,6 +97,7 @@ namespace ECommerce.Web
             builder.Services.AddScoped<ICacheService, CacheService>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IPaymentService, PaymentService>();
 
             builder.Services.AddAutoMapper(typeof(ProductAssemblyReference).Assembly);
 

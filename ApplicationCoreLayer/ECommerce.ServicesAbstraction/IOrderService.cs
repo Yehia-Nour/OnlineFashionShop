@@ -1,5 +1,4 @@
 ﻿using ECommerce.Shared.CommonResult;
-using ECommerce.Shared.DTOs;
 using ECommerce.Shared.DTOs.OrderDTOs;
 
 namespace ECommerce.ServicesAbstraction

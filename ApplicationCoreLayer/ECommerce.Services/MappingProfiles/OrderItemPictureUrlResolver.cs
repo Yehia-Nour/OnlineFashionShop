@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ECommerce.Domain.Entities.OrderModule;
-using ECommerce.Shared.DTOs;
+using ECommerce.Shared.DTOs.OrderDTOs;
 using Microsoft.Extensions.Configuration;
 
 namespace ECommerce.Services.MappingProfiles
